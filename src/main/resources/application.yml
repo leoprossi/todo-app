@@ -9,6 +9,12 @@ spring:
     password: 123123
     url: jdbc:postgresql://localhost:5432/todo
   jpa:
+    open-in-view: false
     show-sql: true
-  hibernate:
-    ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: update
