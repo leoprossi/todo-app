@@ -7,7 +7,7 @@
 <body>
 <div>
     <h1>Create TODO</h1>
-    <form th:object="${todo}" th:action="@{/save}" method="POST">
+    <form th:object="${todo}" th:action="@{/create}" method="POST">
         <fieldset>
             <label>Title</label>
             <input type="text" th:field="*{title}" placeholder="Insert the title"><br/>
