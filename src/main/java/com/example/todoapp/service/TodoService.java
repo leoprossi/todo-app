@@ -1,15 +1,15 @@
 package com.example.todoapp.service;
 
 import com.example.todoapp.domain.Todo;
-import com.example.todoapp.domain.request.TodoRequest;
+import com.example.todoapp.domain.request.TodoForm;
 import com.example.todoapp.mapper.TodoMapper;
 import com.example.todoapp.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class TodoService {
@@ -25,8 +25,26 @@ public class TodoService {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public TodoForm findById(Long id) {
+        Todo todo = repository.findById(id).orElseThrow(NoSuchElementException::new);
+        return mapper.todoToRequest(todo);
+    }
+
     @Transactional
-    public void save(TodoRequest todo) {
-        repository.save(mapper.requestToTodo(todo));
+    public void save(TodoForm todoForm) {
+        repository.save(mapper.requestToTodo(todoForm));
+    }
+
+    @Transactional
+    public void update(Long id, TodoForm todoForm) {
+        Todo todo = mapper.requestToTodo(todoForm);
+        todo.setId(id);
+        repository.save(todo);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

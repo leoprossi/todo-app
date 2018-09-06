@@ -6,7 +6,9 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class TodoRequest {
+public class TodoForm {
+
+    private Long id;
 
     @NotNull
     private String title;
