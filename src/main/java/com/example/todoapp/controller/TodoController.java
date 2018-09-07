@@ -1,6 +1,8 @@
 package com.example.todoapp.controller;
 
+import com.example.todoapp.domain.Todo;
 import com.example.todoapp.domain.request.TodoForm;
+import com.example.todoapp.enums.State;
 import com.example.todoapp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +26,14 @@ public class TodoController {
 
     @GetMapping("/")
     public ModelAndView index() {
-        List<com.example.todoapp.domain.Todo> response = service.findAll();
-        return new ModelAndView("index")
-                .addObject("todos", response);
+//        List<Todo> response = service.findAll();
+//        return new ModelAndView("index")
+//                .addObject("todos", response);
+        ModelAndView model = new ModelAndView("index");
+        model.addObject("todo", service.findAllByState(State.TODO));
+        model.addObject("wip", service.findAllByState(State.WIP));
+        model.addObject("done", service.findAllByState(State.DONE));
+        return model;
     }
 
     @GetMapping("/create")

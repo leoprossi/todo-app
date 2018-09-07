@@ -1,30 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>TODO - Add</title>
-</head>
-<body>
-<div>
-    <h1>Create TODO</h1>
-    <form th:object="${todo}" th:action="@{/create}" method="POST">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/base">
+
+<th:block layout:fragment="content">
+    <h1>Create Note</h1>
+    <form class="form-group" th:object="${todo}" th:action="@{/create}" method="POST">
         <fieldset>
-            <label>Title</label>
-            <input type="text" th:field="*{title}" placeholder="Insert the title"><br/>
+            <label for="inputTitle">Title</label>
+            <input id="inputTitle" class="form-control" type="text" th:field="*{title}" placeholder="Insert the title"><br/>
 
-            <label>Content</label>
-            <input type="text" th:field="*{text}" placeholder="Insert the text"><br/>
+            <label for="inputText">Content</label>
+            <input id="inputText" type="text" th:field="*{text}" placeholder="Insert the text"><br/>
 
-            <label>State</label>
-            <select th:field="*{state}">
+            <label for="selectState">State</label>
+            <select id="selectState" class="custom-select" th:field="*{state}">
                 <option th:each="state : ${T(com.example.todoapp.enums.State).values()}"
                         th:value="${state}"
                         th:text="${state}">Status</option>
             </select>
         </fieldset>
-        <a th:href="@{/}">Back</a>
-        <button type="submit">Create</button>
+        <a class="btn btn-outline-primary" th:href="@{/}">Back</a>
+        <button class="btn-outline-sucess" type="submit">Create</button>
     </form>
-</div>
+</th:block>
 </body>
 </html>

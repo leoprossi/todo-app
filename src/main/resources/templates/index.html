@@ -1,25 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>TODO</title>
-</head>
-<body>
-<div>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Text</th>
-            <th></th>
-        </tr>
-        <tr th:each="todo : ${todos}">
-            <td th:text="${todo.title}"></td>
-            <td th:text="${todo.text}"></td>
-            <td th:text="${todo.state}"></td>
-            <a th:href="@{'/edit/' + ${todo.id}}">Edit</a>
-        </tr>
-    </table>
-    <a th:href="@{/create/}">Create</a>
-</div>
-</body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/base">
+
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-2">
+            <h3 class="text-center">TODO</h3>
+        </div>
+        <div class="col-sm-2">
+            <h3 class="text-center">WIP</h3>
+        </div>
+        <div class="col-sm-2">
+            <h3 class="text-center">DONE</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="card" th:each="t : ${todo}">
+                <a class="card-body text-center text-truncate" title="Editar" th:text="${t.title}"
+                   th:href="@{'/edit/' + ${t.id}}"></a>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="card" th:each="t : ${wip}">
+                <a class="card-body text-center text-truncate text-body" title="Editar" th:text="${t.title}"
+                   th:href="@{'/edit/' + ${t.id}}"></a>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="card" th:each="t : ${done}">
+                <a class="card-body text-center text-truncate text-body" title="Editar" th:text="${t.title}"
+                   th:href="@{'/edit/' + ${t.id}}"></a>
+            </div>
+        </div>
+    </div>
+</th:block>
 </html>
