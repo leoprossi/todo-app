@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/base">
 <head>
-    <meta charset="UTF-8">
-    <title>TODO - Edit</title>
+    <title>Todo-App :: Edit</title>
 </head>
-<body>
-<div>
-    <h1>Edit TODO</h1>
-    <form th:object="${todo}" th:action="@{'/edit/{id}'(id=${todo.id})}" th:method="POST">
+<th:block layout:fragment="content">
+    <h1>Edit Note</h1>
+    <form class="form-group" th:object="${todo}" th:action="@{'/edit/{id}'(id=${todo.id})}" th:method="POST">
         <fieldset>
-            <label>Title</label>
-            <input type="text" th:field="*{title}" value="${todo.title}"><br/>
+            <label for="inputTitle">Title</label>
+            <input id="inputTitle" class="form-control" type="text" th:field="*{title}" value="${todo.title}"><br/>
 
-            <label>Content</label>
-            <input type="text" th:field="*{text}" placeholder="No text to show" value="${todo.text}"><br/>
+            <label for="inputText">Content</label>
+            <textarea id="inputText" class="form-control" rows="3" th:field="*{text}" placeholder="No text to show"
+                      value="${todo.text}"/><br/>
 
-            <label>State</label>
-            <select th:field="*{state}">
+            <label for="selectState">State</label>
+            <select id="selectState" class="custom-select" th:field="*{state}">
                 <option th:each="state : ${T(com.example.todoapp.enums.State).values()}"
                         th:value="${state}"
                         th:text="${state}"
@@ -25,13 +26,15 @@
                 </option>
             </select>
         </fieldset>
-        <a th:href="@{/}">Back</a>
-        <button type="submit">Update</button>
+        <div class="row form-group">
+            <a class="btn btn-outline-primary" th:href="@{/}">Back</a>
+            <button class="btn btn-outline-success" type="submit">Update</button>
+        </div>
     </form>
-    <form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="DELETE">
+    <form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="POST">
         <input type="hidden" name="gambeta" value="delete"/>
-        <button type="submit" id="submitButton">Delete</button>
+        <button class="btn btn-outline-danger" type="submit" id="submitButton">Delete</button>
     </form>
-</div>
+</th:block>
 </body>
 </html>

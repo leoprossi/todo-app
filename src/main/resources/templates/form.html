@@ -2,26 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/base">
-
+<head>
+    <title>Todo-App :: Create</title>
+    <meta charset="UTF-8">
+</head>
 <th:block layout:fragment="content">
     <h1>Create Note</h1>
     <form class="form-group" th:object="${todo}" th:action="@{/create}" method="POST">
         <fieldset>
             <label for="inputTitle">Title</label>
-            <input id="inputTitle" class="form-control" type="text" th:field="*{title}" placeholder="Insert the title"><br/>
+            <input id="inputTitle" class="form-control" type="text" th:field="*{title}"
+                   placeholder="Insert the title"><br/>
 
             <label for="inputText">Content</label>
-            <input id="inputText" type="text" th:field="*{text}" placeholder="Insert the text"><br/>
+            <textarea id="inputText" class="form-control" rows="3" th:field="*{text}"
+                      placeholder="Insert the text"/><br/>
 
             <label for="selectState">State</label>
             <select id="selectState" class="custom-select" th:field="*{state}">
                 <option th:each="state : ${T(com.example.todoapp.enums.State).values()}"
                         th:value="${state}"
-                        th:text="${state}">Status</option>
+                        th:text="${state}">Status
+                </option>
             </select>
         </fieldset>
-        <a class="btn btn-outline-primary" th:href="@{/}">Back</a>
-        <button class="btn-outline-sucess" type="submit">Create</button>
+        <div class="form-group">
+            <a class="btn btn-outline-primary" th:href="@{/}">Back</a>
+            <button class="btn btn-outline-success" type="submit">Create</button>
+        </div>
     </form>
 </th:block>
 </body>

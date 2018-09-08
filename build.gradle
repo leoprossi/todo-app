@@ -34,6 +34,8 @@ dependencies {
     compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
     compile("org.mapstruct:mapstruct-processor:${mapstructVersion}")
 
+	compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+
 	runtime('org.postgresql:postgresql')
 	runtime('org.springframework.boot:spring-boot-devtools')
 
