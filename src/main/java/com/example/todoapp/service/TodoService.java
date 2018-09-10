@@ -1,14 +1,13 @@
 package com.example.todoapp.service;
 
 import com.example.todoapp.domain.Todo;
-import com.example.todoapp.domain.request.TodoForm;
+import com.example.todoapp.domain.forms.TodoForm;
 import com.example.todoapp.enums.State;
 import com.example.todoapp.mapper.TodoMapper;
 import com.example.todoapp.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.NoSuchElementException;

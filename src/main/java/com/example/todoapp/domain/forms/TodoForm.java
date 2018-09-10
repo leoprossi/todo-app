@@ -1,16 +1,16 @@
-package com.example.todoapp.domain.request;
+package com.example.todoapp.domain.forms;
 
 import com.example.todoapp.enums.State;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 public class TodoForm {
 
     private Long id;
 
-    @NotNull
+    @NotEmpty(message = "Title is a mandatory field")
     private String title;
 
     private String text;

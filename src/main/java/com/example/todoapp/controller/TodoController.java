@@ -1,11 +1,11 @@
 package com.example.todoapp.controller;
 
-import com.example.todoapp.domain.Todo;
-import com.example.todoapp.domain.request.TodoForm;
+import com.example.todoapp.domain.forms.TodoForm;
 import com.example.todoapp.enums.State;
 import com.example.todoapp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -26,9 +25,6 @@ public class TodoController {
 
     @GetMapping("/")
     public ModelAndView index() {
-//        List<Todo> response = service.findAll();
-//        return new ModelAndView("index")
-//                .addObject("todos", response);
         ModelAndView model = new ModelAndView("index");
         model.addObject("todo", service.findAllByState(State.TODO));
         model.addObject("wip", service.findAllByState(State.WIP));
@@ -44,15 +40,15 @@ public class TodoController {
     }
 
     @PostMapping("/create")
-    public ModelAndView save(@Valid TodoForm todoForm) {
+    public ModelAndView save(@Valid TodoForm todoForm,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("form")
+                    .addObject("todo", todoForm)
+                    .addObject("bindingResult", bindingResult);
+        }
         service.save(todoForm);
-        return index();
-    }
-
-    @PostMapping("/edit/{id}")
-    public ModelAndView update(@PathVariable Long id, @Valid TodoForm todoForm) {
-        service.update(id, todoForm);
-        return index();
+        return new ModelAndView("redirect:/");
     }
 
     @GetMapping("/edit/{id}")
@@ -65,10 +61,21 @@ public class TodoController {
         }
     }
 
-    @PostMapping("/delete/{id}")
+    @PutMapping("/edit/{id}")
+    public ModelAndView update(@PathVariable Long id, @Valid TodoForm todoForm,
+                               BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("flash", "Error updating note");
+            return new ModelAndView("redirect:/edit/" + id);
+        }
+        service.update(id, todoForm);
+        return new ModelAndView("redirect:/");
+    }
+
+    @DeleteMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable Long id) {
         service.delete(id);
-        return index();
+        return new ModelAndView("redirect:/");
     }
 
 

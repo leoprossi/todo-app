@@ -6,8 +6,18 @@
     <title>Todo-App :: Edit</title>
 </head>
 <th:block layout:fragment="content">
-    <h1>Edit Note</h1>
-    <form class="form-group" th:object="${todo}" th:action="@{'/edit/{id}'(id=${todo.id})}" th:method="POST">
+    <div class="row">
+        <h1>Edit Note</h1>
+        <!--<div>-->
+        <!--<form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="DELETE">-->
+        <!--<input type="hidden" name="_method" value="delete"/>-->
+        <!--<button class="btn btn-outline-danger" type="submit" id="submitButton">-->
+        <!--<img src="/img/close.png" width="5%" height="5%">-->
+        <!--</button>-->
+        <!--</form>-->
+        <!--</div>-->
+    </div>
+    <form class="form-group" th:object="${todo}" th:action="@{'/edit/{id}'(id=${todo.id})}" th:method="PUT">
         <fieldset>
             <label for="inputTitle">Title</label>
             <input id="inputTitle" class="form-control" type="text" th:field="*{title}" value="${todo.title}"><br/>
@@ -26,15 +36,19 @@
                 </option>
             </select>
         </fieldset>
-        <div class="row form-group">
+        <div class="row form-group pt-4">
             <a class="btn btn-outline-primary" th:href="@{/}">Back</a>
             <button class="btn btn-outline-success" type="submit">Update</button>
         </div>
     </form>
-    <form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="POST">
-        <input type="hidden" name="gambeta" value="delete"/>
-        <button class="btn btn-outline-danger" type="submit" id="submitButton">Delete</button>
-    </form>
+    <div class="row">
+        <form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="DELETE">
+            <input type="hidden" name="_method" value="delete"/>
+            <button class="btn btn-outline-danger" type="submit" id="submitButton">
+                Delete
+            </button>
+        </form>
+    </div>
 </th:block>
 </body>
 </html>

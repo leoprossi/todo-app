@@ -4,38 +4,28 @@
       layout:decorator="layouts/base">
 
 <th:block layout:fragment="content">
-    <!--<div class="container border border-dark rounded">-->
-        <div class="row">
-            <div class="col-sm-4">
-                <h3 class="text-center">TODO</h3>
-            </div>
-            <div class="col-sm-4">
-                <h3 class="text-center">WIP</h3>
-            </div>
-            <div class="col-sm-4">
-                <h3 class="text-center">DONE</h3>
+    <div class="row">
+        <div class="col-md-4 col-12">
+            <h3 class="text-center">TODO</h3>
+            <div class="card" th:each="t : ${todo}">
+                <a class="card-body text-center text-truncate text-body" title="Edit" th:text="${t.title}"
+                   th:href="@{'/edit/' + ${t.id}}"></a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="card" th:each="t : ${todo}">
-                    <a class="card-body text-center text-truncate text-body" title="Editar" th:text="${t.title}"
-                       th:href="@{'/edit/' + ${t.id}}"></a>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card" th:each="t : ${wip}">
-                    <a class="card-body text-center text-truncate text-body" title="Editar" th:text="${t.title}"
-                       th:href="@{'/edit/' + ${t.id}}"></a>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card" th:each="t : ${done}">
-                    <a class="card-body text-center text-truncate text-body" title="Editar" th:text="${t.title}"
-                       th:href="@{'/edit/' + ${t.id}}"></a>
-                </div>
+        <div class="col-md-4 col-12">
+            <h3 class="text-center">WIP</h3>
+            <div class="card" th:each="t : ${wip}">
+                <a class="card-body text-center text-truncate text-body" title="Edit" th:text="${t.title}"
+                   th:href="@{'/edit/' + ${t.id}}"></a>
             </div>
         </div>
-    <!--</div>-->
+        <div class="col-md-4 col-12">
+            <h3 class="text-center">DONE</h3>
+            <div class="card" th:each="t : ${done}">
+                <a class="card-body text-center text-truncate text-body" title="Edit" th:text="${t.title}"
+                   th:href="@{'/edit/' + ${t.id}}"></a>
+            </div>
+        </div>
+    </div>
 </th:block>
 </html>

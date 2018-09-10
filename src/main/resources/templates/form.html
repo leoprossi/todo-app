@@ -10,11 +10,12 @@
     <h1>Create Note</h1>
     <form class="form-group" th:object="${todo}" th:action="@{/create}" method="POST">
         <fieldset>
-            <label for="inputTitle">Title</label>
-            <input id="inputTitle" class="form-control" type="text" th:field="*{title}"
+            <label for="inputTitle">Title*</label>
+            <input id="inputTitle" class="form-control" th:errorclass="is-invalid" type="text" th:field="*{title}"
                    placeholder="Insert the title"><br/>
+            <p th:errors="*{title}">ERRO</p>
 
-            <label for="inputText">Content</label>
+            <label for="inputText">Content*</label>
             <textarea id="inputText" class="form-control" rows="3" th:field="*{text}"
                       placeholder="Insert the text"/><br/>
 
@@ -26,7 +27,7 @@
                 </option>
             </select>
         </fieldset>
-        <div class="form-group">
+        <div class="form-group pt-4">
             <a class="btn btn-outline-primary" th:href="@{/}">Back</a>
             <button class="btn btn-outline-success" type="submit">Create</button>
         </div>

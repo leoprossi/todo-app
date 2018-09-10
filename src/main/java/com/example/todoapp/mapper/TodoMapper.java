@@ -1,7 +1,7 @@
 package com.example.todoapp.mapper;
 
 import com.example.todoapp.domain.Todo;
-import com.example.todoapp.domain.request.TodoForm;
+import com.example.todoapp.domain.forms.TodoForm;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
