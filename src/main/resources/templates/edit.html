@@ -6,16 +6,14 @@
     <title>Todo-App :: Edit</title>
 </head>
 <th:block layout:fragment="content">
-    <div class="row">
+    <div class="row" style="justify-content: space-between">
         <h1>Edit Note</h1>
-        <!--<div>-->
-        <!--<form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="DELETE">-->
-        <!--<input type="hidden" name="_method" value="delete"/>-->
-        <!--<button class="btn btn-outline-danger" type="submit" id="submitButton">-->
-        <!--<img src="/img/close.png" width="5%" height="5%">-->
-        <!--</button>-->
-        <!--</form>-->
-        <!--</div>-->
+            <form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="DELETE">
+                <input type="hidden" name="_method" value="delete"/>
+                <button class="btn btn-danger" type="submit" id="submitButton">
+                    <i class="fas fa-times" style="vertical-align: middle"></i>
+                </button>
+            </form>
     </div>
     <form class="form-group" th:object="${todo}" th:action="@{'/edit/{id}'(id=${todo.id})}" th:method="PUT">
         <fieldset>
@@ -36,19 +34,12 @@
                 </option>
             </select>
         </fieldset>
-        <div class="row form-group pt-4">
+        <div class="form-group pt-4">
             <a class="btn btn-outline-primary" th:href="@{/}">Back</a>
             <button class="btn btn-outline-success" type="submit">Update</button>
         </div>
     </form>
-    <div class="row">
-        <form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="DELETE">
-            <input type="hidden" name="_method" value="delete"/>
-            <button class="btn btn-outline-danger" type="submit" id="submitButton">
-                Delete
-            </button>
-        </form>
-    </div>
+
 </th:block>
 </body>
 </html>

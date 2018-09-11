@@ -8,24 +8,28 @@
 </head>
 <th:block layout:fragment="content">
     <h1>Create Note</h1>
-    <form class="form-group" th:object="${todo}" th:action="@{/create}" method="POST">
+    <form th:object="${todoForm}" th:action="@{/create}" method="POST">
         <fieldset>
-            <label for="inputTitle">Title*</label>
-            <input id="inputTitle" class="form-control" th:errorclass="is-invalid" type="text" th:field="*{title}"
-                   placeholder="Insert the title"><br/>
-            <p th:errors="*{title}">ERRO</p>
-
-            <label for="inputText">Content*</label>
-            <textarea id="inputText" class="form-control" rows="3" th:field="*{text}"
-                      placeholder="Insert the text"/><br/>
-
-            <label for="selectState">State</label>
-            <select id="selectState" class="custom-select" th:field="*{state}">
-                <option th:each="state : ${T(com.example.todoapp.enums.State).values()}"
-                        th:value="${state}"
-                        th:text="${state}">Status
-                </option>
-            </select>
+            <div class="form-group">
+                <label for="inputTitle">Title*</label>
+                <input id="inputTitle" class="form-control" th:errorclass="is-invalid" type="text" th:field="*{title}"
+                       placeholder="Insert the title"/>
+                <span th:errors="*{title}" class="invalid-feedback"></span>
+            </div>
+            <div class="form-group">
+                <label for="inputText">Content</label>
+                <textarea id="inputText" class="form-control" rows="3" th:field="*{text}"
+                          placeholder="Insert the text"/>
+            </div>
+            <div class="form-group">
+                <label for="selectState">State</label>
+                <select id="selectState" class="custom-select" th:field="*{state}">
+                    <option th:each="state : ${T(com.example.todoapp.enums.State).values()}"
+                            th:value="${state}"
+                            th:text="${state}">Status
+                    </option>
+                </select>
+            </div>
         </fieldset>
         <div class="form-group pt-4">
             <a class="btn btn-outline-primary" th:href="@{/}">Back</a>

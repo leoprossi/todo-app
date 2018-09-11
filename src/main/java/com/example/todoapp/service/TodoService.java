@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -43,8 +44,8 @@ public class TodoService {
 
     @Transactional
     public void update(Long id, TodoForm todoForm) {
-        Todo todo = mapper.requestToTodo(todoForm);
-        todo.setId(id);
+        Todo todo = repository.findById(id).orElseThrow(NoSuchElementException::new);
+        mapper.requestToTodo(todo, todoForm);
         repository.save(todo);
     }
 

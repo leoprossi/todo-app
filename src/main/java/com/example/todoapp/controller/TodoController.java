@@ -34,9 +34,9 @@ public class TodoController {
 
     @GetMapping("/create")
     public ModelAndView creationForm() {
-        TodoForm todo = new TodoForm();
+        TodoForm todoForm = new TodoForm();
         return new ModelAndView("form")
-                .addObject("todo", todo);
+                .addObject("todoForm", todoForm);
     }
 
     @PostMapping("/create")
@@ -44,8 +44,7 @@ public class TodoController {
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("form")
-                    .addObject("todo", todoForm)
-                    .addObject("bindingResult", bindingResult);
+                    .addObject("todo", todoForm);
         }
         service.save(todoForm);
         return new ModelAndView("redirect:/");
