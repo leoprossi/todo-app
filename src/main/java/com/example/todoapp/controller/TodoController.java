@@ -44,7 +44,7 @@ public class TodoController {
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("form")
-                    .addObject("todo", todoForm);
+                    .addObject("todoForm", todoForm);
         }
         service.save(todoForm);
         return new ModelAndView("redirect:/");
@@ -54,7 +54,7 @@ public class TodoController {
     public ModelAndView editForm(@PathVariable Long id) {
         try {
             TodoForm todoForm = service.findById(id);
-            return new ModelAndView("edit").addObject("todo", todoForm);
+            return new ModelAndView("edit").addObject("todoForm", todoForm);
         } catch (NoSuchElementException e) {
             return new ModelAndView("notFound");
         }
@@ -64,8 +64,8 @@ public class TodoController {
     public ModelAndView update(@PathVariable Long id, @Valid TodoForm todoForm,
                                BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("flash", "Error updating note");
-            return new ModelAndView("redirect:/edit/" + id);
+            return new ModelAndView("edit")
+                    .addObject("todoForm", todoForm);
         }
         service.update(id, todoForm);
         return new ModelAndView("redirect:/");

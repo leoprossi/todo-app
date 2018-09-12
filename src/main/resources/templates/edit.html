@@ -8,21 +8,22 @@
 <th:block layout:fragment="content">
     <div class="row" style="justify-content: space-between">
         <h1>Edit Note</h1>
-            <form action="#" th:action="@{'/delete/{id}'(id=${todo.id})}" th:method="DELETE">
+            <form action="#" th:action="@{'/delete/{id}'(id=${todoForm.id})}" th:method="DELETE">
                 <input type="hidden" name="_method" value="delete"/>
                 <button class="btn btn-danger" type="submit" id="submitButton">
                     <i class="fas fa-times" style="vertical-align: middle"></i>
                 </button>
             </form>
     </div>
-    <form class="form-group" th:object="${todo}" th:action="@{'/edit/{id}'(id=${todo.id})}" th:method="PUT">
+    <form class="form-group" th:object="${todoForm}" th:action="@{'/edit/{id}'(id=${todoForm.id})}" th:method="PUT">
         <fieldset>
             <label for="inputTitle">Title</label>
-            <input id="inputTitle" class="form-control" type="text" th:field="*{title}" value="${todo.title}"><br/>
+            <input id="inputTitle" class="form-control" type="text" th:field="*{title}" th:errorclass="is-invalid" value="${todoForm.title}">
+            <span th:errors="*{title}" class="invalid-feedback"></span><br/>
 
             <label for="inputText">Content</label>
             <textarea id="inputText" class="form-control" rows="3" th:field="*{text}" placeholder="No text to show"
-                      value="${todo.text}"/><br/>
+                      value="${todoForm.text}"/><br/>
 
             <label for="selectState">State</label>
             <select id="selectState" class="custom-select" th:field="*{state}">
@@ -39,7 +40,8 @@
             <button class="btn btn-outline-success" type="submit">Update</button>
         </div>
     </form>
-
+    <!DOCTYPE html>
+    <html>
 </th:block>
 </body>
 </html>
