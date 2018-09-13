@@ -8,32 +8,75 @@
         <div class="col-md-4 col-12">
             <h3 class="text-center">TODO</h3>
             <div class="card" th:each="t : ${todo}">
-                <div class="row card-body">
-                    <a class="text-center text-truncate text-body" title="Edit" th:text="${t.title}"
-                       th:href="@{'/edit/' + ${t.id}}"></a>
-                    <div class="dropdown">
-                        <a class="dropdown-toggle float-right" href="#" role="button" data-toggle="dropdown" data-target="card-dropdown">
-                            <!--<i class="fas fa-ellipsis-v"></i>-->
-                        </a>
-                        <div class="dropdown-menu" id="card-dropdown">
-                            <a class="dropdown-item">Delete</a>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <a class="text-center text-truncate text-body" title="Edit" th:text="${t.title}"
+                               th:href="@{'/edit/' + ${t.id}}"></a>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="dropdown">
+                                <a class="text-body float-right" href="#" role="button" data-toggle="dropdown"
+                                   data-target="todo-dropdown">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu" id="todo-dropdown">
+                                    <a class="dropdown-item">Delete</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-md-4 col-12">
             <h3 class="text-center">WIP</h3>
             <div class="card" th:each="t : ${wip}">
-                <a class="card-body text-center text-truncate text-body" title="Edit" th:text="${t.title}"
-                   th:href="@{'/edit/' + ${t.id}}"></a>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <a class="text-center text-truncate text-body" title="Edit" th:text="${t.title}"
+                               th:href="@{'/edit/' + ${t.id}}"></a>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="dropdown">
+                                <a class="text-body float-right" href="#" role="button" data-toggle="dropdown"
+                                   data-target="wip-dropdown">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu" id="wip-dropdown">
+                                    <a class="dropdown-item">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="col-md-4 col-12">
             <h3 class="text-center">DONE</h3>
             <div class="card" th:each="t : ${done}">
-                <a class="card-body text-center text-truncate text-body" title="Edit" th:text="${t.title}"
-                   th:href="@{'/edit/' + ${t.id}}"></a>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <a class="text-center text-truncate text-body" title="Edit" th:text="${t.title}"
+                               th:href="@{'/edit/' + ${t.id}}"></a>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="dropdown">
+                                <a class="text-body float-right" href="#" role="button" data-toggle="dropdown"
+                                   data-target="done-dropdown">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu" id="done-dropdown">
+                                    <a class="dropdown-item">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
