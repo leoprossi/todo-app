@@ -8,17 +8,17 @@
 <th:block layout:fragment="content">
     <div class="row" style="justify-content: space-between">
         <h1>Edit Note</h1>
-            <form action="#" th:action="@{'/delete/{id}'(id=${todoForm.id})}" th:method="DELETE">
-                <input type="hidden" name="_method" value="delete"/>
-                <button class="btn btn-danger" type="submit" id="submitButton">
-                    <i class="fas fa-times" style="vertical-align: middle"></i>
-                </button>
-            </form>
+        <div class="form-group">
+            <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                <i class="fas fa-times" style="vertical-align: middle"></i>
+            </a>
+        </div>
     </div>
     <form class="form-group" th:object="${todoForm}" th:action="@{'/edit/{id}'(id=${todoForm.id})}" th:method="PUT">
         <fieldset>
             <label for="inputTitle">Title</label>
-            <input id="inputTitle" class="form-control" type="text" th:field="*{title}" th:errorclass="is-invalid" value="${todoForm.title}">
+            <input id="inputTitle" class="form-control" type="text" th:field="*{title}" th:errorclass="is-invalid"
+                   value="${todoForm.title}">
             <span th:errors="*{title}" class="invalid-feedback"></span><br/>
 
             <label for="inputText">Content</label>
@@ -40,8 +40,36 @@
             <button class="btn btn-outline-success" type="submit">Update</button>
         </div>
     </form>
-    <!DOCTYPE html>
-    <html>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fas fa-exclamation-triangle"></i> Warning <i class="fas fa-exclamation-triangle"></i>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this note?</p>
+                    <p>(this action cannot be undone)</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary-outline" data-dismiss="modal">Cancel</button>
+                    <form action="#" th:action="@{'/delete/{id}'(id=${todoForm.id})}" th:method="DELETE">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button class="btn btn-danger" type="submit" id="submitButton">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </th:block>
 </body>
 </html>
