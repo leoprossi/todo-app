@@ -49,6 +49,12 @@ public class TodoService {
         repository.save(todo);
     }
 
+    public void moveTo(Long id, State state) {
+        Todo todo = repository.findById(id).orElseThrow(NoSuchElementException::new);
+        todo.setState(state);
+        repository.save(todo);
+    }
+
     @Transactional
     public void delete(Long id) {
         repository.deleteById(id);

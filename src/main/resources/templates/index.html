@@ -21,6 +21,20 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu" id="todo-dropdown">
+                                    <form action="#" th:action="@{'/moveTo/{id}?state=WIP'(id=${t.id})}" th:method="PATCH">
+                                        <input type="hidden" name="_method" value="patch"/>
+                                        <button class="dropdown-item" type="submit">
+                                            Move to WIP
+                                        </button>
+                                    </form>
+
+                                    <form action="#" th:action="@{'/moveTo/{id}?state=DONE'(id=${t.id})}" th:method="PATCH">
+                                        <input type="hidden" name="_method" value="patch"/>
+                                        <button class="dropdown-item" type="submit">
+                                            Move to DONE
+                                        </button>
+                                    </form>
+
                                     <button class="dropdown-item" data-toggle="modal" data-target="#todoModal">
                                         Delete
                                     </button>
@@ -62,6 +76,8 @@
             </div>
         </div>
 
+        <!--<div th:insert="fragments/_column.html :: list(${todo}, 'TODO')"></div>-->
+
         <div class="col-md-4 col-12">
             <h3 class="text-center">WIP</h3>
             <div class="card" th:each="t : ${wip}">
@@ -78,6 +94,20 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu" id="wip-dropdown">
+
+                                    <form action="#" th:action="@{'/moveTo/{id}?state=TODO'(id=${t.id})}" th:method="PATCH">
+                                        <input type="hidden" name="_method" value="patch"/>
+                                        <button class="dropdown-item" type="submit">
+                                            Move to TODO
+                                        </button>
+                                    </form>
+
+                                    <form action="#" th:action="@{'/moveTo/{id}?state=DONE'(id=${t.id})}" th:method="PATCH">
+                                        <input type="hidden" name="_method" value="patch"/>
+                                        <button class="dropdown-item" type="submit">
+                                            Move to DONE
+                                        </button>
+                                    </form>
                                     <button class="dropdown-item" data-toggle="modal" data-target="#wipModal">
                                         Delete
                                     </button>
@@ -135,6 +165,19 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu" id="done-dropdown">
+                                    <form action="#" th:action="@{'/moveTo/{id}?state=TODO'(id=${t.id})}" th:method="PATCH">
+                                        <input type="hidden" name="_method" value="patch"/>
+                                        <button class="dropdown-item" type="submit">
+                                            Move to TODO
+                                        </button>
+                                    </form>
+
+                                    <form action="#" th:action="@{'/moveTo/{id}?state=WIP'(id=${t.id})}" th:method="PATCH">
+                                        <input type="hidden" name="_method" value="patch"/>
+                                        <button class="dropdown-item" type="submit">
+                                            Move to WIP
+                                        </button>
+                                    </form>
                                     <button class="dropdown-item" data-toggle="modal" data-target="#doneModal">
                                         Delete
                                     </button>
