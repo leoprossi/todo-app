@@ -40,12 +40,7 @@
                                     Move to DONE
                                 </button>
                             </form>
-
-<<<<<<< HEAD
-                            <button class="dropdown-item" data-toggle="modal" data-target="#todoModal">
-=======
                             <button class="dropdown-item" data-toggle="modal" th:attr="data-target='#todoModal'+${t.id}">
->>>>>>> 3db978ef6a8c26d077f6870018f1647d5d888367
                                 Delete
                             </button>
                         </div>
@@ -54,11 +49,7 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-        <div class="modal fade" id="todoModal" tabindex="-1" role="dialog"
-=======
         <div class="modal fade" th:attr="id='todoModal'+${t.id}" tabindex="-1" role="dialog"
->>>>>>> 3db978ef6a8c26d077f6870018f1647d5d888367
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

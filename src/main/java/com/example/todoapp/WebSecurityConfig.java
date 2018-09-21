@@ -15,13 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    private PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Autowired
     private AccountService accountService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -33,14 +33,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                    .antMatchers("/").permitAll()
+                    .antMatchers("/login*").anonymous()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/login?error=true")
                     .permitAll()
                     .and()
                 .logout()
-                    .permitAll();
+                    .logoutSuccessUrl("/login");
     }
 }

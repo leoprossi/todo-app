@@ -1,6 +1,5 @@
 package com.example.todoapp.service;
 
-import com.example.todoapp.domain.Account;
 import com.example.todoapp.repository.AccountRepository;
 import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,7 @@ public class AccountService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountRepository.findByUsername(username);
-        if (account == null) {
-            throw new UsernameNotFoundException(username);
-        }
-        return account;
+        return accountRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }
