@@ -10,7 +10,7 @@ public class TodoForm {
 
     private Long id;
 
-    @NotEmpty(message = "Title is a mandatory field")
+    @NotEmpty(message = "The field 'title' cannot be blank.")
     private String title;
 
     private String text;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo-App :: Register</title>
+</head>
+<th:block layout:fragment="content">
+    <div class="login-box">
+        <div class="row" style="justify-content: center">
+            <h3>Todo-App</h3>
+        </div>
+        <form action="/register" method="POST" th:object="${account}">
+            <div class="form-group">
+                <label for="inputUsername">E-mail</label>
+                <input id="inputUsername" type="text" class="form-control" th:errorClass="is-invalid"
+                       th:field="*{username}" placeholder="Insert your e-mail address">
+
+            </div>
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input id="inputName" type="text" class="form-control" th:errorClass="is-invalid"
+                       th:field="*{name}" placeholder="Insert your name">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input id="inputPassword" type="password" class="form-control" th:errorClass="isInvalid"
+                       th:field="*{password}" placeholder="Insert your password">
+            </div>
+            <div class="form-group">
+                <label for="inputConfirmPassword">Confirm password</label>
+                <input id="inputConfirmPassword" type="password" class="form-control" th:errorClass="isInvalid"
+                       th:field="*{confirmPassword}" placeholder="Insert the same password">
+            </div>
+            <div class="row">
+                <div class="pull-float">
+                    <button type="submit" class="btn btn-default btn-block btn-flat">Sign Up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>
+</html>
